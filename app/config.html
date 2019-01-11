@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>Configuring the Group Calendar Tab</p>
+    <script src="https://statics.teams.microsoft.com/sdk/v1.0/js/MicrosoftTeams.min.js"></script>
+    <script src="/TeamsGroupCalendar/app/Config/appconfig.js"></script>
+    <script type="text/javascript">
+        // Initialize microsoft teams tab library
+        microsoftTeams.initialize();
+        appConfig = getConfig();
+        // Configure the save event
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            // Save the settings for the tab and notify of success
+            microsoftTeams.settings.setSettings({
+                contentUrl: appConfig.hostRoot + "/TeamsGroupCalendar/app/tab.html",
+                suggestedDisplayName: "Group Calendar",
+                websiteUrl: appConfig.hostRoot + "/TeamsGroupCalendar/app/tab.html",
+                removeUrl: appConfig.hostRoot + "/TeamsGroupCalendar/app/remove.html"
+            });
+            saveEvent.notifySuccess();
+        });
+
+        // Automatically set the save state to success
+        microsoftTeams.settings.setValidityState(true);
+    </script>
+</body>
+</html>
